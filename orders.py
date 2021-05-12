@@ -20,3 +20,15 @@ class Bucket:
     @property
     def total_cost(self):
         return sum(item.total_cost for item in self.items)
+
+    @property
+    def receipt(self):
+        s = 'Item, Unit Price, Quality, Total Cost'
+
+        if self.items:
+            for item in self.items:
+                s += f'{item.name}, {item.unit_price}, {item.quantity}, {item.total_cost}'
+
+            s += f'----,----,----,{self.total_cost}'
+            return s
+        raise Exception("Can't create receipt without data")
